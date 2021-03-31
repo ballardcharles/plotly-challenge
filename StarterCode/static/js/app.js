@@ -60,6 +60,20 @@ function showPlot(id) {
         }
 
         Plotly.newPlot("bubble", bubbleData, bubbleLayout)
+
+        var pieTrace = {
+            values: topSamples,
+            labels: otuId,
+            type: 'pie'
+        }
+
+        var pieLayout = {
+            title: "Top 10 OTU Counts"
+        }
+
+        var pieData = [pieTrace]
+
+        Plotly.newPlot("gauge", pieData, pieLayout)
     
     });
 
