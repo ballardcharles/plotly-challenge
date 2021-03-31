@@ -65,8 +65,26 @@ function showPlot(id) {
 
 };
 
+function getDemoInfo (id){
+    d3.json("../data/samples.json").then((data) => {
+
+        var metaData = data.metadata;
+
+        var demoId = metaData.filter(m => m.id.toString() === id)[0];
+
+        var demoInfo = d3.select("#sample-metadata")
+
+        demoInfo.html("")
+
+        Object.entries(demoId).forEach(([key, value]) => {
+            demoInfo.append("h6").text(key.charAt(0).toUpperCase() + key.slice(1) + ": " + value + "\n")
+        })
+    })
+}
+
 function optionChanged(id) {
     showPlot(id)
+    getDemoInfo(id)
 };
 
 function init() {
@@ -79,6 +97,7 @@ function init() {
         });
 
         showPlot(data.names[0]);
+        getDemoInfo(data.names[0]);
     });
 };
 
